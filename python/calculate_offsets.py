@@ -2,16 +2,21 @@ import pickle
 import pandas as pd
 from pathlib import Path
 
+
+# fix weird pandas view thing
+pd.options.mode.copy_on_write = True
+
 runs = [1, 2]
 
 info_file_name = "Binary Images Info.txt"
-run_dir = {1: "run1/floor1", 2: "run2/floor1"}
+run_dir = {1: "../dumps/run1/floor1", 2: "../dumps/run2/floor1"}
 
 # paths for files to compare
 run_info_path = {run: Path(directory + "/" + info_file_name) for run, directory in run_dir.items()}
 
 # get dataframes
 columns = ["Path", "Start", "End"]
+#dataframes = {run: pd.read_csv(path, delim_whitespace=True, names=columns) for run, path in run_info_path.items()}
 dataframes = {run: pd.read_csv(path, delim_whitespace=True, names=columns) for run, path in run_info_path.items()}
 
 # keep only DuckStation entries
@@ -36,9 +41,12 @@ if not same_length.all():
     raise ValueError("One or more path ranges don't match between runs.")
 
 # calculate offsets
-results = dataframes[1]["Path"]
+results = dataframes[1]["Path"].to_frame()
 results["Offset_int"] = dataframes[1]["Start_int"] - dataframes[2]["Start_int"]
-results["Offset"] = results["Offset_int"].apply(lambda x: str(hex(x)))
-print(results["Offset"])
+results["Start_int"] = dataframes[2]["Start_int"]
+results["End_int"] = dataframes[2]["End_int"]
 
 # save to pickle
+pickle_name = "run1_minus_run2_offsets.pkl"
+results.to_pickle(pickle_name)
+print("Saved offsets to", pickle_name)
