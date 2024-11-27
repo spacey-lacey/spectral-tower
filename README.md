@@ -22,11 +22,11 @@ Development outline:
 
 ### Setup
 Create virtual Python environment and install dependencies:
-'''
+```
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-'''
+```
 
 ### Dumping RAM
 Connect Bit Slicer to DuckStation while playing the game.  From the top bar, select "Menu" → "Dump All Memory" (unless I can make "Dump Memory Range" actually work).
