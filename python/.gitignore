@@ -1,0 +1,4 @@
+*.pkl
+*.bin
+*.png
+__pycache__
