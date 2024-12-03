@@ -15,14 +15,28 @@ Completed tasks:
 2. Ripped tiles for one terrain
 3. Drafted scripts to draw map using tiles
 4. Identified RAM addresses indicating current location (tower, floor)
-5. Wrote live Bit Slicer script to read in the map when the floor changes
+5. Wrote live Bit Slicer script to read and display map when the floor changes
 
 To do:
-1. Add some debug variables to Bit Slicer script to view in main window
-2. Incorporate map drawing into Bit Slicer script
-3. Find a RAM address that represents terrain
-4. Rip assets for other terrains
-5. Modify script to use correct terrain for current floor
+1. Implement tkinter and saving in the Bit Slicer script
+2. Find a RAM address that represents terrain
+3. Rip assets for other terrains
+4. Modify script to use correct terrain for current floor
+
+### Setup
+In `bit_slicer` there is a script that must be manually copied into a Bit Slicer file (gross, I know).
+
+From the base directory, run the setup script:
+```
+./setup.sh
+```
+This inserts the (absolute) path to this directory to the Python path in Bit Slicer.  The Bit Slicer Python environment is sandboxed, so this is the only way to import the modules in this repo.
+
+Copy the entire contents of `bit_slicer/mapping_interface.py` to the clipboard.
+
+Open Bit Slicer.  A new file will open automatically.  Using the menu, select Variable → Add Variable → Script.  A template script with the value \#Edit Me! will be added to the file.
+
+Double click on the script in the file.  A text editor window will open.  Delete the current contents and paste in the contents of `mapping_interface.py`.  Save the Bit Slicer file so you never have to do this again.
 
 
 ## Live English translation
